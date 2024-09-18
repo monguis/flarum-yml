@@ -2,12 +2,16 @@ services:
   - type: web
     name: flarum
     env: docker
-    plan: starter  # Choose an appropriate plan based on your needs
-    image: mondedie/flarum:stable  # Specify the Docker image directly
-    build_command: ""  # Not needed since using a pre-built image
-    start_command: ""  # Not needed since using a pre-built image
+    plan: starter
+    image: mondedie/flarum:stable
+    build_command: ""
+    start_command: ""
     env_vars:
-      FLARUM_ENV_FILE: ${FLARUM_ENV_FILE}  # Define any required environment variables
-      # Add any other environment variables needed for Flarum
+      FLARUM_ENV_FILE: ${FLARUM_ENV_FILE}  # Path to your environment file if necessary
+      DB_HOST: ${DB_HOST}  # Set these according to the details provided by Render
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
     ports:
       - "80:8888"
