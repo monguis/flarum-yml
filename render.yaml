@@ -4,8 +4,6 @@ services:
     env: docker
     plan: starter
     image: mondedie/flarum:stable
-    build_command: ""
-    start_command: ""
     env_vars:
       FLARUM_ENV_FILE: ${FLARUM_ENV_FILE}  # Path to your environment file if necessary
       DB_HOST: ${DB_HOST}  # Set these according to the details provided by Render
