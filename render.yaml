@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: flarum
+    env: docker
+    plan: starter  # Choose an appropriate plan based on your needs
+    dockerfile_path: ./Dockerfile  # If you have a Dockerfile; if not, you can specify the image directly
+    image: mondedie/flarum:stable  # Directly specify the Docker image
+    build_command: ""  # Not needed since using a pre-built image
+    start_command: ""  # Not needed since using a pre-built image
+    env_vars:
+      # Load environment variables from a file if needed
+      # Use Render's Secrets Management to securely manage these
+      FLARUM_ENV_FILE: ${FLARUM_ENV_FILE}  # Set the path to your .env file as an environment variable if applicable
+    ports:
+      - "80:8888"
+    # Note: Render doesn’t support Docker volumes, so you need to adjust this in your Dockerfile or application settings
+
+  - type: database
+    name: mariadb
+    env: postgres  # Use `postgres` for PostgreSQL; use `mysql` if explicitly supporting MySQL is required
+    plan: starter  # Choose an appropriate plan for the database
+    env_vars:
+      MYSQL_ROOT_PASSWORD: xxxxxxxxxx
+      MYSQL_DATABASE: flarum
+      MYSQL_USER: flarum
+      MYSQL_PASSWORD: xxxxxxxxxx
+    # Note: Render doesn't support Docker volumes directly, so the database data storage needs to be managed differently.
